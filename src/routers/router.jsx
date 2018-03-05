@@ -1,11 +1,16 @@
 import React from 'react'
 import {
-    Route,
+    Route, Link,Switch,Redirect
 } from 'react-router-dom'
-const Login = require('./../components/Login').default;
+import Login from './../components/Login';
+import Reg from './../components/Reg';
+import Main  from  './../components/content/main';
 const Routes = (
-    <Route>
-        <Route path="/" component={Login}/>
-    </Route>
+    <Switch>
+        <Route path="/login" component={Login}/>
+        <Route path="/reg" component={Reg}/>
+        <Route path="/content" component={Main}/>
+        <Redirect from="*" to="/content/index"/>
+    </Switch>
 )
 export  default  Routes

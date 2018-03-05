@@ -10,6 +10,7 @@ class Login extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props)
         console.log('start');
     }
     componentWillReceiveProps(nextProps){
@@ -29,14 +30,20 @@ class Login extends Component {
     handerClick1() {
         console.log(this.props);
         console.log(this.props.loginStatus);
+        fetch('/api').then((res)=>{
+            console.log(res);
+        })
     }
 
     handerClick2() {
-        fetch('/api').then(()=>{
-
+        fetch('/mock').then((res)=>{
+            console.log(res);
         })
         this.props.changeStatus();
         console.log(this.props.loginStatus);
+    }
+    toReg(){
+        this.props.history.push('/reg')
     }
 
     render() {
@@ -54,6 +61,7 @@ class Login extends Component {
             <div>
                 <div onClick={this.handerClick1.bind(this)} style={style}>click1</div>
                 <div onClick={this.handerClick2.bind(this)} style={style2}>click2</div>
+                <button onClick={this.toReg.bind(this)}>go register</button>
             </div>
         )
     }

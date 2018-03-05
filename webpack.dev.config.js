@@ -18,14 +18,14 @@ const webpackConfigDev = {
     devtool: 'eval-source-map',
     devServer: {
         // contentBase: resolve('../app'),
-        historyApiFallback: false,
+        historyApiFallback: true,
         hot: true,
         inline:true,
         // host: '0.0.0.0',
         port: 8014,
         open:true,
         proxy: {
-            '/api': 'http://localhost:8888',
+            '/mock': 'http://localhost:8888',
         }
     },
 }

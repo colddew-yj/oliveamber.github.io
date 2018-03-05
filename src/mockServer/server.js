@@ -7,7 +7,8 @@ http.createServer(function (request, response) {
     // HTTP 状态值: 200 : OK
     // 内容类型: text/plain
     response.writeHead(200, {'Content-Type': 'text/plain'});
-    let data = Mock.mock('/', {status:'000'})
+    // let data = Mock.mock('/', {status:'000'})
     // 发送响应数据 "Hello World"
-    response.end(JSON.stringify(data))
+    response.end("hello word")
+    // console.log(JSON.stringify(data))
 }).listen(8888);

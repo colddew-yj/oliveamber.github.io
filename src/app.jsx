@@ -1,7 +1,7 @@
 import 'babel-polyfill'
 import React from "react"
 import ReactDOM from "react-dom"
-import {BrowserRouter, HashRouter, Router} from 'react-router-dom'
+import { BrowserRouter as Router,HashRouter} from 'react-router-dom'
 import Routes from './routers/router'
 import thunk from 'redux-thunk'
 import {Provider} from 'react-redux'

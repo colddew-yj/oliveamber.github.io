@@ -8,7 +8,6 @@ const reducers = (state = initState, action) => {
             return  Object.assign({}, state,{status:action.payload.status});
             break;
         default:return state
-
     }
 }
 export  default  reducers
