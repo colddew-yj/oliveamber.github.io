@@ -2,72 +2,99 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-
-
+// var px2rem = require('postcss-px2rem');
+// const px2rem = require('postcss-px2rem');
 const webpackConfigBase = {
-    entry: {
-        app: path.join(__dirname, 'src/app.jsx'),
-    },
-    resolve: {
-        extensions: ['.js', '.json', '.jsx', '.less']
-        // alias: {
-        //     // components: path.join(__dirname, '/src/redux')
-        // },
-    },
-    // resolveLoader: {
-    //   moduleExtensions: ['-loader']
-    // },
-    module: {
-        rules: [
+  entry: {
+    app: path.join(__dirname, 'src/app.jsx'),
+    vendor: ['react', 'react-dom']
+  },
+  resolve: {
+    extensions: [
+      '.js', '.json', '.jsx', '.less'
+    ],
+    alias: {
+      Components: path.resolve(__dirname, 'src/components'),
+      Content: path.resolve(__dirname, 'src/components/content'),
+      Redux: path.resolve(__dirname, 'src/redux'),
+      Common: path.resolve(__dirname, 'src/common'),
+      Styles: path.resolve(__dirname, 'src/styles')
+    }
+  },
+  plugins: [
+    // 将打包后的资源注入到html文件内
+    new HtmlWebpackPlugin({
+      template: path.join(__dirname, 'index.html')
+    }),
+    new webpack.optimize.CommonsChunkPlugin({name: 'vendor'}),
+    new webpack.optimize.CommonsChunkPlugin({name: 'manifest.js'}),
+    // new webpack.LoaderOptionsPlugin({
+    //   options: {
+    //     postcss: function() {
+    //       return [
+    //         require('postcss-import')(),
+    //         require('autoprefixer')({
+    //           browsers: ['last 10 Chrome versions', 'last 5 Firefox versions', 'Safari >= 6', 'ie > 8']
+    //         }),
+    //         require('postcss-px2rem')({remUnit: 100})
+    //       ];
+    //     }
+    //   }
+    // })
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(less|css)$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: [
             {
-                test: /\.js[x]?$/,
-                exclude: /node_modules/,
-                loader: 'babel-loader',
+              loader: 'css-loader',
+              options: {
+                minimize: true,
+                camelCase: true
+              }
             },
-            {
-                test: /\.less$/,
-                use:ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-                        {loader: 'less', options: {sourceMap: true, modules: true}}
-                    ]
-                }),
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-                loader: 'url',
-                options: {
-                    limit: 8192,
-                    name: 'img/[name].[hash:4].[ext]'
-                }
-            },
-            {
-                test: /\.(woff|eot|ttf|svg|gif)$/,
-                loader: 'url',
-                options: {
-                    limit: 8192,
-                    name: 'font/[name].[hash:4].[ext]'
-                }
-            },
-        ],
-    },
-    plugins: [
-        // 提取css
-        new ExtractTextPlugin('style.css'),
-        // 将打包后的资源注入到html文件内
-        new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'index.html')
+            'postcss-loader'
+          ]
         })
-        // new webpack.optimize.CommonsChunkPlugin({
-        //     name: 'client', // 入口文件名
-        //     filename: 'common.bundle.js', // 打包后的文件名
-        //     minChunks: function (module, count) {
-        //         return module.resource &&
-        //             /\.js$/.test(module.resource) &&
-        //             module.resource.indexOf(resolve('../node_modules')) === 0
-        //     }
-        // })
+      }, {
+        test: /\.js[x]?$/,
+        exclude: /node_modules/,
+        use: ['babel-loader']
+      }, {
+        test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: 'img/[name].[hash:4].[ext]'
+          }
+        }
+      }, {
+        test: /\.(woff|eot|ttf|svg|gif)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 8192,
+            name: 'font/[name].[hash:4].[ext]'
+          }
+        }
+      }, {
+        test: /\.(htm|html)$/,
+        use: [
+          {
+            loader: 'html-loader',
+            options: {
+              minimize: true,
+              attrs: ['img:src', 'link:href']
+            }
+          }
+        ]
+      }
     ]
+  }
 }
 
 module.exports = webpackConfigBase
