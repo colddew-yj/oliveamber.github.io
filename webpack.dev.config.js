@@ -31,7 +31,7 @@ const webpackConfigDev = {
     inline: true,
     // host: '0.0.0.0',
     port: 8014,
-    open: false,
+    open: true,
     proxy: {
       '/mock': 'http://localhost:8888'
     }

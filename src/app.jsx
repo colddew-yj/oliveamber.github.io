@@ -12,6 +12,19 @@ import './styles/common'
 if (module.hot) {
     module.hot.accept()
 }
+//JS监听浏览器文字大小代码
+(function (doc, win) {
+    var docEl = doc.documentElement,
+        resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+        recalc = function () {
+            var clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            docEl.style.fontSize = 20 * (clientWidth / 375) + 'px';
+        };
+    if (!doc.addEventListener) return;
+    win.addEventListener(resizeEvt, recalc, false);
+    doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
 let store = createStore(reducers);
 ReactDOM.render(<Provider store={store}>
   <HashRouter>

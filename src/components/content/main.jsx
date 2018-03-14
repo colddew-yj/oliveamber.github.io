@@ -21,7 +21,6 @@ class Main extends Component {
             <Aside>
                 main
                 <Switch>
-
                     <Route path={`${url}/index`} component={Index}/>
                     <Route path={`${url}/show`} component={Show}/>
                     <Redirect from="*" to={`${url}/index`} />
