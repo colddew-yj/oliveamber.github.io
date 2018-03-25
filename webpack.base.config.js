@@ -2,12 +2,10 @@ const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-// var px2rem = require('postcss-px2rem');
-// const px2rem = require('postcss-px2rem');
 const webpackConfigBase = {
   entry: {
     app: path.join(__dirname, 'src/app.jsx'),
-    vendor: ['react', 'react-dom']
+    vendor: ['react', 'react-dom','redux','react-router-dom']
   },
   resolve: {
     extensions: [

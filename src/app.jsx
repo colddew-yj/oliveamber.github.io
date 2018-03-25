@@ -4,10 +4,10 @@ import ReactDOM from "react-dom"
 import {BrowserRouter as Router, HashRouter} from 'react-router-dom'
 import Routes from './routers/router'
 import thunk from 'redux-thunk'
+import promiseMiddleware from 'redux-promise';
 import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import reducers from './redux/reducer'
-import {fetchSend} from './common/common'
 import './styles/common'
 if (module.hot) {
     module.hot.accept()
@@ -25,7 +25,8 @@ if (module.hot) {
     win.addEventListener(resizeEvt, recalc, false);
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
-let store = createStore(reducers);
+let store = createStore(reducers,applyMiddleware(thunk));
+console.log(store.getState())
 ReactDOM.render(<Provider store={store}>
   <HashRouter>
     {Routes}

@@ -25,7 +25,6 @@ class Main extends Component {
                     <Route path={`${url}/show`} component={Show}/>
                     <Redirect from="*" to={`${url}/index`} />
                 </Switch>
-
             </Aside>
         )
     }

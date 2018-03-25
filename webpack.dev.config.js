@@ -29,9 +29,8 @@ const webpackConfigDev = {
     historyApiFallback: true,
     hot: true,
     inline: true,
-    // host: '0.0.0.0',
     port: 8014,
-    open: true,
+    open: false,
     proxy: {
       '/mock': 'http://localhost:8888'
     }
