@@ -1,12 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {getStep, setNum,asySend} from './../redux/action'
+import {getStep, setNum, asySend} from './../redux/action'
 import {fetchPromise} from  'Common/common'
 class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loginStatus: 0
+            loginStatus: 0,
+            num: ''
         }
     }
 
@@ -27,38 +28,20 @@ class Login extends Component {
     }
 
     componentDidUpdate() {
-        console.log(this.props.loginStatus);
+        console.log(this.props);
         console.log(3)
     }
 
 
     handerClick1() {
         console.log(this.props);
-        fetchPromise('/mock',{name1:'111',key1:'222'})
-        // fetch('/mock').then((res) => {
-        //     res.json().then((val)=>{
-        //         console.log(val);
-        //
-        //     }).catch(function(err){
-        //         console.log(err)
-        //     });
-        // })
+        fetchPromise('/mock', {name1: '111', key1: '222'})
+        this.props.setNum({num: '00000'});
     }
 
     handerClick2() {
-        // fetch('/mock').then((res) => {
-        //     res.json().then((val)=>{
-        //         console.log(val);
-        //         this.props.changeStatus({status:val.name});
-        //     });
-        //
-        // }).catch(function(err){
-        //     console.log(err)
-        // })
-        this.props.asySend('/mock',{name1:'111',key1:'222'});
-        // this.props.changNum({num:111});
-
-        console.log(this.props.loginStatus);
+        this.props.asySend('/mock', {name1: '111', key1: '222'});
+        this.props.getStep({status: 'alive'});
     }
 
     toReg() {
@@ -84,17 +67,12 @@ class Login extends Component {
     }
 }
 const mapStateToProps = (state) => {
-    return {loginStatus: state.logincCom.status}
-}
-const mapDispatchToProps = (dispatch, props) => {
     return {
-        changeStatus: (data={}) => {
-            return getStep(dispatch,data)
-        },
-        changNum: (data={}) => {
-            return setNum(dispatch,data)
-        }
+        loginStatus: state.logincCom.status,
+        logincCom: state.logincCom.resData,
+        num:state.otherCom.num
     }
-
 }
-export default connect(mapStateToProps, {asySend})(Login)
+// const mapDispatchToProps = (dispatch, props) => {
+// }
+export default connect(mapStateToProps, {asySend, setNum,getStep})(Login)

@@ -12,5 +12,5 @@ http.createServer(function (request, response) {
     // let data = Mock.mock('/', {status:'000'})
     // 发送响应数据 "Hello World"
     console.log(request)
-    response.end(JSON.stringify({name:'520'}))
+    response.end(JSON.stringify({data:{name:'520'},status:1}))
 }).listen(8888);

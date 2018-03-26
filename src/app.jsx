@@ -9,9 +9,6 @@ import {Provider} from 'react-redux'
 import {createStore, applyMiddleware} from 'redux'
 import reducers from './redux/reducer'
 import './styles/common'
-if (module.hot) {
-    module.hot.accept()
-}
 //JS监听浏览器文字大小代码
 (function (doc, win) {
     var docEl = doc.documentElement,
@@ -26,7 +23,16 @@ if (module.hot) {
     doc.addEventListener('DOMContentLoaded', recalc, false);
 })(document, window);
 let store = createStore(reducers,applyMiddleware(thunk));
-console.log(store.getState())
+if (module.hot) {//第一次热更新存在报错
+    module.hot.accept();
+}
+// if (module.hot) {
+//     // Enable Webpack hot module replacement for reducers
+//     module.hot.accept('./redux/reducer', () => {
+//         store.replaceReducer(reducers);
+//     });
+// }
+
 ReactDOM.render(<Provider store={store}>
   <HashRouter>
     {Routes}

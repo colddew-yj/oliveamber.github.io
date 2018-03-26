@@ -42,22 +42,7 @@ const webpackConfigBase = {
   ],
   module: {
     rules: [
-      {
-        test: /\.(less|css)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                camelCase: true
-              }
-            },
-            'postcss-loader'
-          ]
-        })
-      }, {
+     {
         test: /\.js[x]?$/,
         exclude: /node_modules/,
         use: ['babel-loader']

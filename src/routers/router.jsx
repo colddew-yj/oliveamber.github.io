@@ -13,4 +13,5 @@ const Routes = (
         <Redirect from="*" to="/content/index"/>
     </Switch>
 )
+
 export  default  Routes
