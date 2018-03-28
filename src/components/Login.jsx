@@ -60,7 +60,7 @@ class Login extends Component {
             width: '80px'
         }
         return (<div>
-            <div onClick={this.handerClick1.bind(this)} style={style}>click1</div>
+            <div onClick={this.handerClick1.bind(this)} style={style}>click111</div>
             <div onClick={this.handerClick2.bind(this)} style={style2}>click2</div>
             <button onClick={this.toReg.bind(this)}>go register</button>
         </div>)

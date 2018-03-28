@@ -55,7 +55,17 @@ const webpackConfigBase = {
             name: 'img/[name].[hash:4].[ext]'
           }
         }
-      }, {
+      },
+        {
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            use: {
+                loader: 'image-webpack-loader',
+                options: {
+                 enforce:'pre'
+                }
+            }
+        }
+        , {
         test: /\.(woff|eot|ttf|svg|gif)$/,
         use: {
           loader: 'url-loader',

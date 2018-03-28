@@ -13,7 +13,8 @@ const webpackConfigDev = {
     },
     output: {
         path: path.join(__dirname, './dist'),
-        filename: '[name].js'
+        filename: '[name].js',
+        chunkFilename: '[name].js',
     },
     plugins: [
         // 定义环境变量为开发环境

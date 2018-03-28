@@ -32,11 +32,6 @@ const webpackConfigProd = {
         chunkFilename: '[name].[chunkhash:5].js',
         path: path.resolve(__dirname, 'dist')
     },
-    // module: {
-    //    rules: [
-    //
-    //    ]
-    // },
     plugins: [
         // 定义环境变量为开发环境
         new webpack.DefinePlugin({
@@ -50,6 +45,7 @@ const webpackConfigProd = {
         new webpack.optimize.UglifyJsPlugin({minimize: true}),
         new CleanWebpackPlugin(['dist']),
         new ExtractTextPlugin("[name].[hash:5].css"),
+        new webpack.optimize.ModuleConcatenationPlugin()
         // 分析代码
         // new BundleAnalyzerPlugin({analyzerPort: 3011}),
         // new Copy([
